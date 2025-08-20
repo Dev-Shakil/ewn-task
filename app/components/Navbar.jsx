@@ -13,18 +13,15 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex space-x-8 items-center">
-            
-            <Link href="/sign-in" className="text-gray-100 bg-[#688129] px-4 py-2 rounded-sm font-semibold text-sm hover:text-green-600">
+
+            <Link href="/sign-in" className="text-gray-100 bg-[#688129] px-4 py-2 rounded-sm font-semibold text-sm hover:text-white">
               Sign In
             </Link>
           </div>
-
-          
-          
         </div>
       </div>
 
-      
+
     </nav>
   );
 }

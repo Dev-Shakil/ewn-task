@@ -27,5 +27,5 @@ export default function useMultiStepForm(initialData, schema) {
   const next = () => validateStep() && setStep(prev => prev + 1)
   const back = () => setStep(prev => prev - 1)
 
-  return { step, steps: schema, formData, errors, handleChange, next, back, validateStep }
+  return { step, steps: schema, setFormData, formData, errors, handleChange, next, back, validateStep }
 }

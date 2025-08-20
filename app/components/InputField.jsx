@@ -1,7 +1,8 @@
 "use client"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/material.css';
 export default function InputField({
   id,
   name,
@@ -13,35 +14,14 @@ export default function InputField({
   required = false,
   showPasswordToggle = false,
   options = [], // for select dropdown
-  countries = [], // for phone codes
 }) {
   const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef(null)
-  const [selectedCountry, setSelectedCountry] = useState(null)
-
-  // Initialize default country code only for phone inputs
-  useEffect(() => {
-    if (type !== "phone") return
-
-    const val = typeof value === "string" ? value : ""
-
-    if (!val && countries.length > 0) {
-      const defaultCountry = countries.find((c) => c.dial_code === "+880") || countries[0]
-      setSelectedCountry(defaultCountry)
-      onChange({ target: { name, value: defaultCountry.dial_code + " " } })
-    } else if (val) {
-      const code = val.split(" ")[0]
-      const country = countries.find((c) => c.dial_code === code)
-      setSelectedCountry(country)
-    }
-  }, [countries, type])
-
-
-
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
     setTimeout(() => inputRef.current?.focus(), 0)
   }
+
 
   const actualType = showPasswordToggle
     ? showPassword
@@ -71,79 +51,17 @@ export default function InputField({
         </select>
       ) : type === "phone" ? (
         // Phone input with country code
-        // <div className={`flex rounded focus:border-indigo-600 border ${error ? "border-red-500" : "border-gray-300"}`}>
-        //   <select
-        //     value={selectedCountry?.dial_code || ""}
-        //     className="outline-none focus:outline-none px-2 py-2 text-sm"
-        // onChange={(e) => {
-        //   const code = e.target.value;
-        //   const number = value?.split(" ")[1] || "";
-        //   onChange({ target: { name, value: code + " " + number } });
-        //   const country = countries.find((c) => c.dial_code === code);
-        //   setSelectedCountry(country);
+        <PhoneInput
+          country="bd"
+          value={value || ""} // initial value
+          onChange={(phone) => onChange({ target: { name, value: phone } })}
+          inputClass="!w-full !py-2 !pl-14 !pr-3 !text-black !border !border-gray-300 !rounded-sm focus:!border-indigo-300"
+          buttonClass="!border-gray-300 !rounded-l-sm"
+          disableDropdown={false}
+          countryCodeEditable={false}
 
-        // }}
-        //   >
-        //     <option value="+880" selected>BD</option>
-        //     {countries.map((c) => (
-        //       <option key={c.code} value={c.dial_code}>
-        //         {c.flag} {c.dial_code}
-        //       </option>
-        //     ))}
-        //   </select>
+        />
 
-        //   <input
-        //     ref={inputRef}
-        //     id={id}
-        //     name={name}
-        //     type="tel"
-        //   value={value?.split(" ")[1] || ""} // Only the number part
-        // onChange={(e) =>
-        //   onChange({
-        //     target: { name, value: (selectedCountry?.dial_code || "+880") + " " + e.target.value },
-        //   })
-        // }
-        //     placeholder=" "
-        //     className={`peer w-full text-black rounded-r px-3 pt-2 pb-2 outline-none transition-all 
-        //        `}
-        //   />
-        // </div>
-        <div className={`flex rounded border focus-within:border-indigo-600 ${error ? "border-red-500" : "border-gray-300"}`}>
-          {/* Country Code Select */}
-          <select
-            value={selectedCountry?.dial_code || ""}
-            onChange={(e) => {
-              const code = e.target.value
-              const number = value?.split(" ")[1] || ""
-              onChange({ target: { name, value: code + " " + number } })
-              const country = countries.find((c) => c.dial_code === code)
-              setSelectedCountry(country)
-            }}
-            className="px-2 py-2 text-sm rounded-l outline-none"
-          >
-            {countries.map((c) => (
-              <option key={c.code} value={c.dial_code}>
-                {c.flag} {c.dial_code}
-              </option>
-            ))}
-          </select>
-
-          {/* Phone Number Input */}
-          <input
-            ref={inputRef}
-            id={id}
-            name={name}
-            type="tel"
-            value={value?.split(" ")[1] || ""} // only the number part
-            onChange={(e) =>
-              onChange({
-                target: { name, value: (selectedCountry?.dial_code || "+880") + " " + e.target.value },
-              })
-            }
-            placeholder="123456789"
-            className="w-full px-3 py-2 rounded-r outline-none text-black"
-          />
-        </div>
       ) : type === "file" ? (
         // File input
         <input
@@ -174,7 +92,7 @@ export default function InputField({
       )}
 
       {/* Floating Label */}
-      {type !== "file" && (
+      {type !== "file" && type !== "phone" && (
         <label
           htmlFor={id}
           className={`absolute left-3 text-gray-500 transition-all bg-white px-1

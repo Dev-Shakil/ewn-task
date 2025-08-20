@@ -6,7 +6,7 @@ const initialData = {
   // Business Info
   business_name: "",
   url: "",
-  trade_licence: null, // file field, better to set null
+  trade_licence: null,
   district: "",
   city: "",
   zip_code: "",
