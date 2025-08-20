@@ -1,4 +1,4 @@
-import {businessFormSchema} from "../../help/FormDataSchema"
+import {businessFormSchema} from "../../helper/FormDataSchema"
 import MultiStepForm from "../../components/MultiStepForm"
 
 

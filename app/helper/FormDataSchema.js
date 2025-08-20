@@ -33,7 +33,7 @@ export const individualFormSchema = [
         fields: [
           { name: "first_name", label: "First Name", type: "text", required: true },
           { name: "last_name", label: "Last Name", type: "text", required: true },
-          { name: "phone", label: "Phone Number", type: "text", required: true },
+          { name: "phone", label: "Phone Number", type: "phone", required: true },
           { name: "email", label: "Email", type: "email", required: true },
           { name: "roll", label: "Role", type: "select", required: true, options: [
               { value: "", label: "NONE" },
@@ -81,7 +81,7 @@ export const businessFormSchema = [
         fields: [
           { name: "first_name", label: "First Name", type: "text", required: true },
           { name: "last_name", label: "Last Name", type: "text", required: true },
-          { name: "phone", label: "Phone Number", type: "text", required: true },
+          { name: "phone", label: "Phone Number", type: "phone", required: true },
           { name: "email", label: "Email", type: "email", required: true },
           { name: "roll", label: "Role", type: "select", required: true, options: [
               { value: "", label: "NONE" },

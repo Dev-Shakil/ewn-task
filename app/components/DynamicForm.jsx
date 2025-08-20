@@ -1,7 +1,7 @@
 "use client"
 
 import InputField from "./InputField"
-
+import { countries } from "../helper/countries"
 
 export default function DynamicForm({ stepSchema, formData, errors, handleChange }) {
   return (
@@ -19,6 +19,7 @@ export default function DynamicForm({ stepSchema, formData, errors, handleChange
               onChange={handleChange}
               error={errors[field.name]}
               required={field.required}
+              countries={countries}
               options={field.options || []}
               showPasswordToggle={field.showPasswordToggle || false}
             />

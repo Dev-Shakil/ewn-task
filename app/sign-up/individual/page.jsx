@@ -68,7 +68,7 @@
 //   )
 // }
 
-import {individualFormSchema} from "../../help/FormDataSchema"
+import {individualFormSchema} from "../../helper/FormDataSchema"
 import MultiStepForm from "../../components/MultiStepForm"
 
 

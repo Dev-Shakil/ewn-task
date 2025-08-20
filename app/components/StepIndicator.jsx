@@ -23,9 +23,8 @@ export default function StepIndicator({ steps, currentStep }) {
               {/* Line (except last step) */}
               {index < steps.length - 1 && (
                 <div
-                  className={`flex-1 h-[2px] md:w-[390px] w-[200px] ${
-                    currentStep > stepNumber ? "bg-[#688119]" : "bg-gray-300"
-                  }`}
+                  className={`flex-1 h-[2px] md:w-[390px] w-[200px] ${currentStep > stepNumber ? "bg-[#688119]" : "bg-gray-300"
+                    }`}
                 />
               )}
             </div>
